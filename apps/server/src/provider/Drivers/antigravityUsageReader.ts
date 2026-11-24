@@ -126,13 +126,18 @@ const MODEL_IDS: Record<number, string> = {
   1417: "gemini-4-argon",
   1418: "gemini-4-argon",
   1419: "gemini-4-argon",
+  1527: "gemini-4-hydrogen-low",
+  1532: "gemini-4-neon-high",
+  1535: "gemini-4-neon-xhigh",
   1537: "gemini-pro-orchestrator-neon",
+  1669: "gemini-4-hydrogen-orchestrator",
 };
 
 // Effort and routing variants share the base model's price.
 export const antigravityRateModel = (model: string) => {
+  if (model === "gemini-flash-worker-agy") return "gemini-4-hydrogen";
   const base = model.replace(
-    /-(?:extra-low|low|medium|high|tiered|control|thinking|agent|orchestrator)$/,
+    /-(?:extra-low|low|medium|high|xhigh|tiered|control|thinking|agent|orchestrator)$/,
     "",
   );
   return /^gemini-3-flash-(?:agent(?:-[ab])?|[ab])$/.test(model)
@@ -178,7 +183,13 @@ function isConcreteModel(model: string): boolean {
 
 function rememberModel(models: Map<number, string | null>, id: number, model: string | null) {
   const previous = models.get(id);
-  models.set(id, previous === undefined || previous === model ? model : null);
+  if (previous === undefined || previous === model) {
+    models.set(id, model);
+    return;
+  }
+  // The same Gemini enum may be reported with and without its thinking level.
+  const base = model && antigravityRateModel(model);
+  models.set(id, base && previous && antigravityRateModel(previous) === base ? base : null);
 }
 
 interface Metadata {

@@ -15,6 +15,7 @@ describe("buildPeriodColumns", () => {
           ["codex" as const, { costUsd: 10, totalTokens: 100 }],
           ["claude" as const, { costUsd: 20, totalTokens: 200 }],
           ["pi" as const, { costUsd: 5, totalTokens: 50 }],
+          ["devin" as const, { costUsd: 3, totalTokens: 30 }],
           ["muse" as const, { costUsd: 7, totalTokens: 70 }],
         ]),
       },
@@ -40,6 +41,7 @@ describe("buildPeriodColumns", () => {
       { provider: "cursor", value: 0 },
       { provider: "opencode", value: 0 },
       { provider: "antigravity", value: 0 },
+      { provider: "devin", value: 3 },
       { provider: "pi", value: 5 },
       { provider: "muse", value: 7 },
     ]);

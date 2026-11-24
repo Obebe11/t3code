@@ -8,9 +8,10 @@ type UsageProviderPresentation = {
   readonly label: string;
   readonly color: string;
   readonly driverKind: ProviderDriverKind;
+  readonly acpRegistryAgentId?: string;
 };
 
-export const PROVIDER_PRESENTATION = {
+export const PROVIDER_PRESENTATION: Record<UsageProviderKind, UsageProviderPresentation> = {
   codex: {
     label: "Codex",
     color: "var(--contrast-foreground)",
@@ -37,6 +38,12 @@ export const PROVIDER_PRESENTATION = {
     color: "#8c7bd1",
     driverKind: ProviderDriverKind.make("antigravity"),
   },
+  devin: {
+    label: "Devin",
+    color: "#3184bc",
+    driverKind: ProviderDriverKind.make("acpRegistry"),
+    acpRegistryAgentId: "devin",
+  },
   pi: {
     label: "Pi",
     color: "#4d9f8a",
@@ -47,7 +54,7 @@ export const PROVIDER_PRESENTATION = {
     color: "#0866ff",
     driverKind: ProviderDriverKind.make("muse"),
   },
-} satisfies Record<UsageProviderKind, UsageProviderPresentation>;
+};
 
 export const PROVIDER_ORDER = Object.keys(PROVIDER_PRESENTATION) as UsageProviderKind[];
 
