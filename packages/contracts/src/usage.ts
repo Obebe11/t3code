@@ -14,6 +14,7 @@ export const UsageProviderKind = Schema.Literals([
   "cursor",
   "opencode",
   "antigravity",
+  "devin",
   "pi",
   "muse",
 ]);

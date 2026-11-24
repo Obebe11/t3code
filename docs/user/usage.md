@@ -8,7 +8,7 @@ On mobile, choose **Usage** in the workspace navigation.
 
 ## Understand your usage
 
-**Usage** combines Codex, Claude Code, Grok Build, OpenCode, Antigravity, Pi, Muse Code, and Cursor history
+**Usage** combines Codex, Claude Code, Grok Build, OpenCode, Devin CLI, Antigravity, Pi, Muse Code, and Cursor history
 from your connected environments. It shows token use, cache savings, model breakdowns, and estimated API-equivalent
 cost, split by token type and by speed. These estimates are not your subscription bill.
 **Premium** is what Fast and Ultrafast requests cost above standard rates. Cost that cannot be
@@ -26,6 +26,8 @@ it longer, set `usageHistoryRetentionDays` in `<T3 home>/userdata/settings.json`
 such as `365`, or to `"unlimited"`. Usage views still show at most 90 days. Lowering the value
 prunes older history on the next refresh, and raising it again does not bring pruned history back.
 While `settings.json` cannot be read, nothing is pruned.
+
+Devin reads local CLI generation history. Models without a known rate still contribute tokens and sessions.
 
 OpenCode reads its SQLite database and older JSON history. Antigravity reads local conversation
 databases, including T3-managed profiles. Set `OPENCODE_DATA_DIR` or `ANTIGRAVITY_DATA_DIR` on the

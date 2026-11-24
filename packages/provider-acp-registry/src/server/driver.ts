@@ -9,6 +9,7 @@ import {
   type ServerProvider,
   type ServerProviderModel,
 } from "@t3tools/contracts";
+import { devinUsageReader } from "./devinUsage.ts";
 import { AcpRegistrySettings } from "../settings.ts";
 import * as HostProcess from "@t3tools/shared/HostProcess";
 import { createModelCapabilities } from "@t3tools/shared/model";
@@ -628,7 +629,11 @@ export type AcpRegistryDriverEnv =
   | Digest.Digest
   | ProviderHost.ProviderHost;
 
-export const AcpRegistryDriver: ProviderDriver<AcpRegistrySettings, AcpRegistryDriverEnv> = {
+export const AcpRegistryDriver: ProviderDriver<
+  AcpRegistrySettings,
+  AcpRegistryDriverEnv,
+  FileSystem.FileSystem | Path.Path
+> = {
   driverKind: DRIVER_KIND,
   metadata: {
     displayName: "ACP Registry",
@@ -636,6 +641,7 @@ export const AcpRegistryDriver: ProviderDriver<AcpRegistrySettings, AcpRegistryD
     hasDefaultInstance: false,
   },
   configSchema: AcpRegistrySettings,
+  usage: devinUsageReader,
   defaultConfig: () => decodeSettings({}),
   create: Effect.fn("AcpRegistryDriver.create")(function* ({
     instanceId,
